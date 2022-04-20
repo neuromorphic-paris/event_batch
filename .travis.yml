@@ -1,0 +1,22 @@
+dist: focal
+
+language: cpp
+
+compiler:
+  - gcc
+
+before_install:
+  # install dependencies
+  - sudo apt-get update
+  - sudo apt-get -y install cmake
+
+before_script:
+  # configure
+  - mkdir build && cd build
+  - cmake -Devent_batch_BUILD_TEST=ON -DCMAKE_BUILD_TYPE=Debug ..
+
+script:
+  # build
+  - make
+  # run tests
+  - make test
