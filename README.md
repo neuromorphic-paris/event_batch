@@ -1,4 +1,5 @@
 # event_batch
+[![Build Status](https://app.travis-ci.com/neuromorphic-paris/event_batch.svg?token=EcsqzkxC73oqb86Uxx4r&branch=master)](https://app.travis-ci.com/github/neuromorphic-paris/event_batch)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 The authors provide this code in the hope it will be useful for understanding the proposed method, as well as for reproducibility of the results.
