@@ -51,6 +51,19 @@ Lastly, ensure all environment path variables are well set, and compile everythi
 For efficiency reasons, the input events are assumed to be in the [Event Stream](https://github.com/neuromorphic-paris/event_stream) format.
 Please refer to the [loris](https://github.com/neuromorphic-paris/loris) library to convert to/from the [Event Stream](https://github.com/neuromorphic-paris/event_stream) format.
 
+## Usage
+Two executables are provided that estimate the batch size ([batch_size.cpp](https://github.com/neuromorphic-paris/event_batch/blob/master/src/batch_size.cpp)) of an event stream or the end timestamp [microseconds] of the batch ([batch_timestamp.cpp](https://github.com/neuromorphic-paris/event_batch/blob/master/src/batch_timestamp.cpp)).
+Assuming you are in the `build` directory, to run an executable `*`, just run on a terminal:
+  ```bash
+  ./src/batch_* [options] /path/to/input.es
+  ```
+where `*` is either `size` or `timestamp`.
+
+The estimates are sent via the standard output, so you can redirect them with the pipe operator `|` to another executable, e.g.:
+  ```bash
+  ./src/batch_* [options] /path/to/input.es | ./your/executable
+  ```
+
 ## Runtime Benchmark
 The runtime benchmark can be built by setting the flag `event_batch_BUILD_RUNTIME_BENCHMARK` to `ON`.
 Assuming you are in the `build` directory, to run a runtime executable `*`, just run on a terminal:
