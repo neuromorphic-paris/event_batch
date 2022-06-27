@@ -66,6 +66,17 @@ class Batch
   ~Batch() = default;
 
   /**
+   * @brief Returns a reference to the event batch.
+   *
+   * @return Event batch.
+   */
+  const StdVector<Event>&
+  batch() const
+  {
+    return batch_;
+  }
+
+  /**
    * @brief Estimates the ideal batch of a stream of events from the
    * corresponding global decay one event at a time.
    *

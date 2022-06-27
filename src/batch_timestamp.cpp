@@ -61,5 +61,10 @@ main(int argc, char* argv[])
                                        global_decay(event);
                                        batch(event);
                                      });
+
+        if (batch.batch().size() > 0)
+        {
+          std::cout << batch.batch().back().t << '\n';
+        }
       });
 }
