@@ -50,21 +50,17 @@ struct __attribute__((__packed__)) Decay
   void
   operator()(const uint64_t t_cur)
   {
+    decay = static_cast<float>(1);
     const float t_diff = (t_cur > t) ? static_cast<float>(t_cur - t) : 0;
     if (t_diff > 0)
     {
-      decay =
-          static_cast<float>(1) /
-          (static_cast<float>(1e-6) * t_diff * n_decay + static_cast<float>(1));
+      decay /=
+          static_cast<float>(1e-6) * t_diff * n_decay + static_cast<float>(1);
 
       n_decay *= decay;
       t_decay = decay * t_decay + t_diff;
 
       t = t_cur;
-    }
-    else
-    {
-      decay = static_cast<float>(1);
     }
     ++n_decay;
 
