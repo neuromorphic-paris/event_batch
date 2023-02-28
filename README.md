@@ -3,6 +3,8 @@
 [![Build Status](https://app.travis-ci.com/neuromorphic-paris/event_batch.svg?token=EcsqzkxC73oqb86Uxx4r&branch=master)](https://app.travis-ci.com/github/neuromorphic-paris/event_batch)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
+Code for Adaptive Global Decay Process for Event Cameras, CVPR 2023 (to appear).
+
 The authors provide this code in the hope it will be useful for understanding the proposed method, as well as for reproducibility of the results.
 
 For more information and more open-source software please visit the neuromorphic-paris' Github page: <https://github.com/neuromorphic-paris>.
@@ -76,6 +78,12 @@ The estimates are sent via the standard output, so you can redirect them with th
 
 ```bash
 ./src/batch_* [options] /path/to/input.es | ./your/executable
+```
+
+or save them into a file for later processing, e.g.:
+
+```bash
+./src/batch_* [options] /path/to/input.es > ./your/file.csv
 ```
 
 ## Runtime Benchmark
