@@ -51,6 +51,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(sepia)
 
+# tarsier
+FetchContent_Declare(
+  tarsier
+  GIT_REPOSITORY https://github.com/neuromorphic-paris/tarsier
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(tarsier)
+
 # Source
 add_subdirectory(${${LIB_NAME}_SOURCE_DIR})
 

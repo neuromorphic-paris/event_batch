@@ -38,6 +38,8 @@ The following are dependencies that are automatically downloaded during the buil
 
 - sepia: <https://github.com/neuromorphic-paris/sepia>
 
+- tarsier: <https://github.com/neuromorphic-paris/tarsier>
+
 - googletest (only downloaded if tests are enabled): <https://github.com/google/googletest.git>
 
 ### General
