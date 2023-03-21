@@ -5,12 +5,12 @@
 
 Code for Adaptive Global Decay Process for Event Cameras, CVPR 2023 (to appear)
 
-```
+```bibtex
 @inproceedings{nunesAdaptiveGlobalDecayProcess2023,
-  title = {Adaptive {Global} {Decay} {Process} for {Event} {Cameras}},
+  title     = {Adaptive {Global} {Decay} {Process} for {Event} {Cameras}},
   booktitle = {{IEEE} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR}) (to appear)},
-  author = {Nunes, Urbano Miguel and Benosman, Ryad and Ieng, Sio-Hoi},
-  year = {2023}
+  author    = {Nunes, Urbano Miguel and Benosman, Ryad and Ieng, Sio-Hoi},
+  year      = {2023}
 }
 ```
 
