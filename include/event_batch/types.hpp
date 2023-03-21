@@ -42,6 +42,50 @@ struct __attribute__((__packed__)) Event
    */
   uint16_t p;
 };
+
+/**
+ * @brief Event decay structure.
+ */
+struct Decay
+{
+  /**
+   * @brief Previous timestamp \f$[\text{microseconds}]\f$.
+   */
+  uint64_t t;
+  /**
+   * @brief Event decay in \f$[0,1]\f$.
+   */
+  float decay;
+  /**
+   * @brief Auxiliary variable that counts the incoming number of events.
+   */
+  float n_decay;
+  /**
+   * @brief Auxiliary variable that estimates the event time decay
+   * \f$[\text{microseconds}]\f$.
+   */
+  float t_decay;
+  /**
+   * @brief Estimated event rate \f$[\text{events}/\text{microseconds}]\f$.
+   */
+  float rate;
+
+  /**
+   * @brief Resets the context.
+   *
+   * @param t_decay_first Initial time rate assumption to bootstrap the rate
+   * estimator \f$[\text{microseconds}]\f$.
+   */
+  void
+  reset(const uint64_t t_decay_first)
+  {
+    t = 0;
+    decay = 1;
+    n_decay = 0;
+    t_decay = t_decay_first;
+    rate = 0;
+  }
+};
 }  // namespace event_batch
 
 #endif  // EVENT_BATCH_TYPES_HPP

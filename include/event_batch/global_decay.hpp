@@ -9,81 +9,11 @@
 #include <cstdint>
 #include <utility>
 
+#include "event_batch/types.hpp"
 #include "event_batch/utils.hpp"
 
 namespace event_batch
 {
-/**
- * @brief Event decay structure.
- */
-struct __attribute__((__packed__)) Decay
-{
-  /**
-   * @brief Previous timestamp \f$[\text{microseconds}]\f$.
-   */
-  uint64_t t;
-  /**
-   * @brief Event decay in \f$[0,1]\f$.
-   */
-  float decay;
-  /**
-   * @brief Auxiliary variable that counts the incoming number of events.
-   */
-  float n_decay;
-  /**
-   * @brief Auxiliary variable that estimates the event time decay
-   * \f$[\text{microseconds}]\f$.
-   */
-  float t_decay;
-  /**
-   * @brief Estimated event rate \f$[\text{events}/\text{microseconds}]\f$.
-   */
-  float rate;
-
-  /**
-   * @brief Estimates the event decay.
-   *
-   * This method estimates the decay by estimating the event stream activity.
-   *
-   * @param t_cur Current timestamp \f$[\text{microseconds}]\f$.
-   */
-  void
-  operator()(const uint64_t t_cur)
-  {
-    decay = static_cast<float>(1);
-    const float t_diff = (t_cur > t) ? static_cast<float>(t_cur - t) : 0;
-    if (t_diff > 0)
-    {
-      decay /=
-          static_cast<float>(1e-6) * t_diff * n_decay + static_cast<float>(1);
-
-      n_decay *= decay;
-      t_decay = decay * t_decay + t_diff;
-
-      t = t_cur;
-    }
-    ++n_decay;
-
-    rate = n_decay / t_decay;
-  }
-
-  /**
-   * @brief Resets the context.
-   *
-   * @param t_decay_first Initial time rate assumption to bootstrap the rate
-   * estimator \f$[\text{microseconds}]\f$.
-   */
-  void
-  reset(const uint64_t t_decay_first)
-  {
-    t = 0;
-    decay = 1;
-    n_decay = 0;
-    t_decay = t_decay_first;
-    rate = 0;
-  }
-};
-
 /**
  * @brief Global decay estimator.
  *
@@ -139,6 +69,62 @@ class GlobalDecay
   ~GlobalDecay() = default;
 
   /**
+   * @brief Returns the current timestamp \f$[\text{microseconds}]\f$.
+   *
+   * @return Current timestamp \f$[\text{microseconds}]\f$.
+   */
+  uint64_t
+  t() const
+  {
+    return decay_.t;
+  }
+
+  /**
+   * @brief Returns the current decay.
+   *
+   * @return Current decay.
+   */
+  float
+  decay() const
+  {
+    return decay_.decay;
+  }
+
+  /**
+   * @brief Returns the count of the incoming number of events.
+   *
+   * @return Count of the incoming number of events.
+   */
+  float
+  n_decay() const
+  {
+    return decay_.n_decay;
+  }
+
+  /**
+   * @brief Returns the event time decay \f$[\text{microseconds}]\f$.
+   *
+   * @return Event time decay \f$[\text{microseconds}]\f$.
+   */
+  float
+  t_decay() const
+  {
+    return decay_.t_decay;
+  }
+
+  /**
+   * @brief Returns the current event rate
+   * \f$[\text{events}/\text{microseconds}]\f$.
+   *
+   * @return Current event rate \f$[\text{events}/\text{microseconds}]\f$.
+   */
+  float
+  rate() const
+  {
+    return decay_.rate;
+  }
+
+  /**
    * @brief Estimates the global decay one event at a time.
    *
    * This method estimates the decay in an event-by-event basis by estimating
@@ -149,7 +135,23 @@ class GlobalDecay
   void
   operator()(Event event)
   {
-    decay_(event.t);
+    decay_.decay = static_cast<float>(1);
+    const float t_diff =
+        (event.t > decay_.t) ? static_cast<float>(event.t - decay_.t) : 0;
+    if (t_diff > 0)
+    {
+      decay_.decay /= static_cast<float>(1e-6) * t_diff * decay_.n_decay +
+                      static_cast<float>(1);
+
+      decay_.n_decay *= decay_.decay;
+      decay_.t_decay = decay_.decay * decay_.t_decay + t_diff;
+
+      decay_.t = event.t;
+    }
+    ++decay_.n_decay;
+
+    decay_.rate = decay_.n_decay / decay_.t_decay;
+
     handle_decay_(event_to_decay_(event, decay_.decay, decay_.n_decay,
                                   decay_.t_decay, decay_.rate));
   }
