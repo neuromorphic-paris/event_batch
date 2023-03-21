@@ -38,7 +38,7 @@ main(int argc, char* argv[])
         TicToc t;
 
         Decay event_decay;
-        auto handle_global_decay = [&](Decay decay) { event_decay = decay; };
+        auto handle_decay = [&](Decay decay) { event_decay = decay; };
 
         auto global_decay = make_global_decay<Event>(
             arguments.t_decay_first,
@@ -46,7 +46,7 @@ main(int argc, char* argv[])
                float rate) -> Decay {
               return {event.t, decay, n_decay, t_decay, rate};
             },
-            handle_global_decay);
+            handle_decay);
 
         t.tic();
         sepia::join_observable<Type>(sepia::filename_to_ifstream(filename),

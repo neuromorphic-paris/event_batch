@@ -11,7 +11,7 @@ TEST(event_batch, GlobalDecay)
   const uint64_t t_decay_first = 10000;
 
   Decay event_decay;
-  auto handle_global_decay = [&](Decay decay) { event_decay = decay; };
+  auto handle_decay = [&](Decay decay) { event_decay = decay; };
 
   auto global_decay = make_global_decay<Event>(
       t_decay_first,
@@ -19,7 +19,7 @@ TEST(event_batch, GlobalDecay)
          float rate) -> Decay {
         return {event.t, decay, n_decay, t_decay, rate};
       },
-      handle_global_decay);
+      handle_decay);
 
   global_decay({0, 120, 90, 0});
   EXPECT_EQ(event_decay.t, 0);

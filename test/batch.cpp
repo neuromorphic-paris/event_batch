@@ -13,7 +13,7 @@ TEST(event_batch, Batch)
   const float weight_thresh = 1.0;
 
   Decay event_decay;
-  auto handle_global_decay = [&](Decay decay) { event_decay = decay; };
+  auto handle_decay = [&](Decay decay) { event_decay = decay; };
 
   auto global_decay = make_global_decay<Event>(
       t_decay_first,
@@ -21,7 +21,7 @@ TEST(event_batch, Batch)
          float rate) -> Decay {
         return {event.t, decay, n_decay, t_decay, rate};
       },
-      handle_global_decay);
+      handle_decay);
 
   StdVector<Event> event_batch;
   auto handle_batch = [&](StdVector<Event> batch) { event_batch = batch; };
