@@ -3,14 +3,15 @@
 [![Build Status](https://app.travis-ci.com/neuromorphic-paris/event_batch.svg?token=EcsqzkxC73oqb86Uxx4r&branch=master)](https://app.travis-ci.com/github/neuromorphic-paris/event_batch)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-Code for Adaptive Global Decay Process for Event Cameras, CVPR 2023 (to appear)
+Code for [Adaptive Global Decay Process for Event Cameras, CVPR 2023](https://openaccess.thecvf.com/content/CVPR2023/html/Nunes_Adaptive_Global_Decay_Process_for_Event_Cameras_CVPR_2023_paper.html)
 
 ```bibtex
-@inproceedings{nunesAdaptiveGlobalDecayProcess2023,
-  title     = {Adaptive {Global} {Decay} {Process} for {Event} {Cameras}},
-  booktitle = {{IEEE} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR}) (to appear)},
-  author    = {Nunes, Urbano Miguel and Benosman, Ryad and Ieng, Sio-Hoi},
-  year      = {2023}
+@inproceedings{nunesAdaptiveGlobalDecay2023,
+	title = {Adaptive {Global} {Decay} {Process} for {Event} {Cameras}},
+	booktitle = {{IEEE}/{CVF} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR})},
+	author = {Nunes, Urbano Miguel and Benosman, Ryad and Ieng, Sio-Hoi},
+	year = {2023},
+	pages = {9771--9780},
 }
 ```
 
